@@ -1,0 +1,40 @@
+name: Variables ambiente ENV
+
+# Controls when the workflow will run
+on:
+  push:
+
+  #preermite ejecitar workflow de forma manual
+  workflow_dispatch:
+
+env:
+  SALUDO: "Hola desde WORKFLOW"
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  demo-env:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    env:
+      SALUDO: "Hola desde el job"
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: "Mostrar variable a nivel job"
+        run: echo "SALUDO = $SALUDO"
+
+      - name: "Mostrar variable a nivel STEP"
+        env:
+          SALUDO: "Hola desde el step"
+        run: echo "SALUDO = $SALUDO"
+
+  demo2-env:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Mostrar variable del workflow"
+        run: echo "SALUDO = $SALUDO"
+      
+    
